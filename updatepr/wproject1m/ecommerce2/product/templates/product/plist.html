@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% url "aproducts:list" as aproduct_list_url %}
+
+{% url "samsungproducts:list" as samsungproduct_list_url %}
+{% url "huaweiproducts:list" as aproduct_list_url %}
+{% url "One_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "Two_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "Three_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "FivektoTenk:list" as FivektoTenk_list_url %}
+{% url "TenktoTwentyk:list" as TenktoTwentyk_list_url %}
+{% url "TwentyktoThirtyk:list" as TwentyktoThirtyk_list_url %}
+
+{% url "FiveMPMobile:list" as FiveMPMobiles_list_url %}
+{% url "EightMPMobile:list" as EightMPMobiles_list_url %}
+{% url "TwelveMPMobile:list" as TwelveMPMobiles_list_url %}
+{% url "searchknowledge:query" as search_list_url %}
+
+
+{% url "product:applelist" as appleproduct_list_url %}
+
+
+
+
+{% block content %}
+<div class="container" style="width: 740px">
+    <h1 style="text-align: center;height: 0.8em">{{title}}</h1>
+    </div>
+<div class="container" style="width: 17%;height: 1550px;float: left;background-color: lavender;margin-left: 0px;margin-top: 5px">
+
+
+
+{#        <button style="background-color: rgb(35, 47, 62);color: white;width: 250px;height:50px;margin-top: 20px">Search By Ram</button>#}
+{#        <button style="background-color: rgb(35, 47, 62);color: white;width: 250px;height:50px;margin-top: 20px">Search By Camera</button>#}
+            <button  style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+                <a style="color: black;width: 250px;height:50px " ><b>Search by Brand</b></a>
+        </button>
+            <button style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="color: white;width: 250px;height:50px"  href="{% url 'product:applelist' %}">Apple</a>
+        </button>
+        <button  style="background-color:#daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="color: white;width: 250px;height:50px " href="{% url 'product:samsunglist' %}">Samsung</a>
+        </button>
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="color: white;width: 250px;height:50px " href="{% url 'product:huaweilist' %}">Huawei</a>
+        </button>
+
+            <button style="background-color: white;color: black;width: 250px;height:50px;padding-left: 0px;margin-top: 10px"><b>Search By Price</b></button>
+            {% include "searchprice/snippets/search_form.html" with instance=obj %}
+
+        <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:10klist' %}"> Below 10000</a>
+        </button>
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:10to20klist' %}">10000 -- 20000</a>
+        </button>
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:20to30klist' %}">20000 -- 30000</a>
+        </button>
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:30klist' %}">30000+ </a>
+        </button>
+
+        <button  style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+            <b>Search by Ram</b>
+        </button>
+        {% include "searchram/snippets/search_form.html" with instance=obj %}
+
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:1GBlist' %}">1GB</a>
+        </button>
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:2GBlist' %}">2GB</a>
+        </button>
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:3GBlist' %}">3GB</a>
+        </button>
+    <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:4GBlist' %}">4GB or above</a>
+        </button>
+
+    <button  style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+        <a style="color:black;width: 250px;height:50px "><b>Search by Camera</b></a>
+        </button>
+                                 <!--{% include "searchprice/snippets/search_form.html" with instance=obj %}-->
+
+        <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:5MPlist' %}"> 5MP </a>
+        </button>
+        <br>
+        <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:8MPlist' %}"> 8MP </a>
+        </button>
+        <br>
+        <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:12MPlist' %}"> 12MP </a>
+        </button>
+        <br>
+        <button  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;width: 250px;height:50px " href="{% url 'product:12MP+list' %}"> 12MP or above </a>
+        </button>
+    <!--<button  style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">-->
+        <!--<a style="color:black;width: 250px;height:50px " href="{% url 'searchknowledge:query' %}"><b>Advanced Search</b></a>-->
+        <!--</button>-->
+
+        <!--{% include "searchknowledge/snippets/search_form.html" with instance=obj %}-->
+    </div>
+
+<div class="container" style="margin-top: 15px;padding-left: 90px">
+        <div class="row">
+<!--{#    <div class="container">#}-->
+<!--{#        <h2>Carousel Example</h2>#}-->
+<!--{#        <div id="myCarousel" class="carousel slide" data-ride="carousel">#}-->
+<!--{#            &lt;!&ndash; Indicators &ndash;&gt;#}-->
+<!--{#            <ol class="carousel-indicators">#}-->
+<!--{#                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>#}-->
+<!--{#                <li data-target="#myCarousel" data-slide-to="1"></li>#}-->
+<!--{#                <li data-target="#myCarousel" data-slide-to="2"></li>#}-->
+<!--{#            </ol>#}-->
+<!--{#            <div class="carousel-inner">#}-->
+<!--{#                <div class="col">#}-->
+                {% for obj in object_list %}
+                    <div class="col-3">
+<!--{##}-->
+<!--{#                    {% if forloop.counter <= 3 %}#}-->
+<!--{##}-->
+<!--{#                                <div class="alert alert-success"></div>#}-->
+<!--{#                        <div class="item active col-md-4">#}-->
+<!--{##}-->
+<!--{#                            {% include "pproducts/snippets/card.html" with instance=obj %}#}-->
+<!--{#                    </div>#}-->
+<!--{#                        </div>#}-->
+<!--{#                    {% elif forloop.counter > 3 %}#}-->
+<!--{##}-->
+<!--{#                        <div class="item col-md-4">#}-->
+
+                            {% include "product/snippets/acard.html" with instance=obj %}
+                    </div>
+<!--{##}-->
+<!--{#                    {% endif %}#}-->
+<!--{##}-->
+                {% endfor %}
+<!--{#                                     </div>#}-->
+
+            </div>
+
+        </div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">next</a>
+            <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<!--{#            &lt;!&ndash; Left and right controls &ndash;&gt;#}-->
+<!--{#        <a class="right carousel-control" href="#myCarousel" data-slide="next">#}-->
+<!--{#                <span class="glyphicon glyphicon-chevron-right"></span>#}-->
+<!--{#                <span class="sr-only">Next</span>#}-->
+<!--{#            </a>#}-->
+<!--{#            <a class="left carousel-control" href="#myCarousel" data-slide="prev">#}-->
+
+<!--{#    {% block basehead %}#}-->
+<!--{#    <meta charset="utf-8">#}-->
+<!--{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}-->
+<!--{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}-->
+<!--{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}-->
+<!--{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}-->
+<!--{#    {% endblock %}#}-->
+
+{% endblock %}

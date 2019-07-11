@@ -1,0 +1,26 @@
+
+{% block content %}
+<div class="container-fluid">
+  <div class="card mb-4 border-0 text-center" style="">
+ {% if instance.image %}
+      <a href="{{ instance.get_absolute_url }}">
+         <img class="card-img-top img-fluid" src="{{ instance.image.url}}" alt="Card image cap " style=" position: relative;
+float: left;width: 230px;height: 250px;background-position: 50% 50%;background-repeat:no-repeat;background-size:cover; ">
+    </a>
+ {% endif %}
+  <div class="card-body">
+    <h4 class="card-title">{{ instance.title|truncatechars:16 }}</h4>
+    <h4 class="card-text">Rs. {{ instance.price }}  </h4>
+
+<br/>
+<a href="{{ instance.get_absolute_url }}" class="btn btn-custom" style="width: 170px;background-color: bc9868 ;color: black ;margin-left:7%">View</a>
+{#                  <!--<a href="{% url "products:detail" slug=instance.slug %}" class="btn btn-warning">URL shortcut</a>-->#}
+
+</div>
+</div>
+  </div>
+
+
+
+
+{% endblock %}

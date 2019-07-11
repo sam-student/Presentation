@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% url "aproducts:list" as aproduct_list_url %}
+
+{% url "samsungproducts:list" as samsungproduct_list_url %}
+{% url "huaweiproducts:list" as aproduct_list_url %}
+{% url "One_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "Two_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "Three_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "FivektoTenk:list" as FivektoTenk_list_url %}
+{% url "TenktoTwentyk:list" as TenktoTwentyk_list_url %}
+{% url "TwentyktoThirtyk:list" as TwentyktoThirtyk_list_url %}
+
+{% url "FiveMPMobile:list" as FiveMPMobiles_list_url %}
+{% url "EightMPMobile:list" as EightMPMobiles_list_url %}
+{% url "TwelveMPMobile:list" as TwelveMPMobiles_list_url %}
+{% url "searchknowledge:query" as search_list_url %}
+
+
+{% url "product:applelist" as appleproduct_list_url %}
+
+
+
+
+{% block content %}
+<div class="container" style="width: 740px">
+    <h1 style="text-align: center;height: 0.8em">User History</h1>
+    </div>
+
+
+<div class="container-fluid" style="margin-top: 15px;padding-left: 30px">
+        <div class="row">
+<!--{#    <div class="container">#}-->
+<!--{#        <h2>Carousel Example</h2>#}-->
+<!--{#        <div id="myCarousel" class="carousel slide" data-ride="carousel">#}-->
+<!--{#            &lt;!&ndash; Indicators &ndash;&gt;#}-->
+<!--{#            <ol class="carousel-indicators">#}-->
+<!--{#                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>#}-->
+<!--{#                <li data-target="#myCarousel" data-slide-to="1"></li>#}-->
+<!--{#                <li data-target="#myCarousel" data-slide-to="2"></li>#}-->
+<!--{#            </ol>#}-->
+<!--{#            <div class="carousel-inner">#}-->
+<!--{#                <div class="col">#}-->
+                {% for obj in object_list %}
+                    <div class="col-2">
+<!--{##}-->
+<!--{#                     {% if forloop.counter <= 3 %}#}-->
+<!--{##}-->
+<!--{#                                <div class="alert alert-success"></div>#}-->
+<!--{#                        <div class="item active col-md-4">#}-->
+<!--{##}-->
+<!--{#                            {% include "pproducts/snippets/card.html" with instance=obj %}#}-->
+<!--{#                    </div>#}-->
+<!--{#                        </div>#}-->
+<!--{#                    {% elif forloop.counter > 3 %}#}-->
+<!--{##}-->
+<!--{#                        <div class="item col-md-4">#}-->
+
+                            {% include "product/snippets/card.html" with instance=obj.content_object %}
+                    </div>
+<!--{##}-->
+<!--{#                    {% endif %}#}-->
+<!--{##}-->
+                {% endfor %}
+<!--{#                                     </div>#}-->
+
+            </div>
+
+        </div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">next</a>
+            <a href="?page={{ object_list.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<!--{#            &lt;!&ndash; Left and right controls &ndash;&gt;#}-->
+<!--{#        <a class="right carousel-control" href="#myCarousel" data-slide="next">#}-->
+<!--{#                <span class="glyphicon glyphicon-chevron-right"></span>#}-->
+<!--{#                <span class="sr-only">Next</span>#}-->
+<!--{#            </a>#}-->
+<!--{#            <a class="left carousel-control" href="#myCarousel" data-slide="prev">#}-->
+
+<!--{#    {% block basehead %}#}-->
+<!--{#    <meta charset="utf-8">#}-->
+<!--{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}-->
+<!--{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}-->
+<!--{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}-->
+<!--{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}-->
+<!--{#    {% endblock %}#}-->
+
+{% endblock %}

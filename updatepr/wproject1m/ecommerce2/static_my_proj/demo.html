@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% url "pproducts:list" as pproduct_list_url %}
+
+{% if request.path == pproduct_list_url %}
+<a class="nav-link" style="color: white ; font-weight: bold" href="{{ pproduct_list_url }}">Top Products</a>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,164 @@
+{% load static %}
+<! doctype html>
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Home</title>
+      {% include "base/css.html" %}
+      {% block base_head %}{% endblock %}
+  </head>
+
+  <body>
+
+    {% include "base/navbar.html" with brand_name="Mogads" %}
+    {% block content %}{% endblock %}
+<!--{#    {% include "base/footer.html" %}#}-->
+
+
+
+ {% include "base/js.html" %}
+
+ {% block javascript %}
+
+ {% endblock %}
+
+  </body>
+  </html>
+
+  <script>
+    $(document).ready(function () {
+
+        // var contactForm = $(".contact-form")
+        // var contactFormMethod = contactForm.attr("method")
+        // var contactFormEndpoint = contactForm.attr("action")
+
+
+
+        var productForm = $(".form-product-ajax")
+
+        productForm.submit(function (event) {
+            event.preventDefault();
+            // console.log("Form is not submit")
+            var thisForm = $(this)
+            // var actionEndpoint = thisForm.attr("action")
+            var actionEndpoint = thisForm.attr("data-endpoint")
+            var httpmethod = thisForm.attr("method")
+            var formData = thisForm.serialize()
+
+            console.log(thisForm.attr("action"), thisForm.attr("method"))
+
+            $.ajax({
+                url: actionEndpoint,
+                method: httpmethod,
+                data: formData,
+                success: function (data) {
+                    var submitSpan = thisForm.find(".submit-span")
+                    if (data.added) {
+                        submitSpan.html("<button type='submit' class='btn btn-link' style=' backkground-color: #daad86;color: black ; margin-left:40%'><strong>Remove</strong></button>")
+                    }
+                    else {
+                        submitSpan.html("<button class=\"btn-reponsive\" type='submit' style=\" backkground-color: #daad86;color: black ;margin-left:30%;font-size:140%\"><strong>Add to cart</strong></button>")
+                    }
+                    var navbarCount = $(".navbar-cart-count")
+                    navbarCount.text(data.cartItemCount)
+                    var currentPath = window.location.href
+
+                    if (currentPath.indexOf("cart") != -1){
+                        refreshCart()
+                    }
+
+                },
+                error: function (errorData) {
+                    console.log("error")
+                    console.log(errorData)
+                }
+
+
+            })
+
+        })
+
+        function refreshCart() {
+            console.log("in current cart")
+            var cartTable = $(".cart-table")
+            var cartBody = cartTable.find(".cart-body")
+            {
+                cartBody.html("<h1>Refresh</h1>")
+            }
+            var refreshCartURL = '/api/cart/'
+            var refreshCartMethod = 'GET'
+            var data = {}
+
+            $.ajax({
+                url: refreshCartURL,
+                method: refreshCartMethod,
+                data: data,
+
+                success: function (data) {
+                    console.log("Success")
+                },
+                error: function (errorData) {
+                    console.log("error")
+                    console.log(errorData)
+                }
+
+
+            })
+            }
+
+          })
+
+  </script>
+
+
+
+
+
+        <!--productForm.submit(function(event) {-->
+            <!--event.preventDefault();-->
+            <!--console.log("Form us not working")-->
+            <!--var thisForm = $(this)-->
+            <!--var actionEndpoint = thisForm.attr("action");-->
+            <!--var httpMethod = thisForm.attr("method");-->
+            <!--var formData = thisForm.serialize();-->
+
+            <!--$.ajax({-->
+              <!--url: actionEndpoint,-->
+              <!--method: httpMethod,-->
+              <!--data: formData,-->
+              <!--success: function(data){-->
+                  <!--console.log("success")-->
+                  <!--console.log(data)-->
+                  <!--console.log("Added", data.added)-->
+                  <!--console.log("Removed", data.removed)-->
+
+                  <!--// var submitSpan = thisForm.find('.submit-span')-->
+                  <!--// if (data.added){-->
+                  <!--//     submitSpan.html()-->
+                  <!--// } else{-->
+                  <!--//     submitSpan.html()-->
+                  <!--// }-->
+              <!--},-->
+              <!--error: function (errorData) {-->
+                <!--console.log("error")-->
+                <!--console.log(errorData)-->
+              <!--}-->
+
+            <!--})-->
+
+
+
+
+        <!--})-->
+    <!--})-->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+  <!--</script>-->
+

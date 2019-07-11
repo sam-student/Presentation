@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    {% if cart.product.exists %}
+<h1 style="text-align:center;margin-top:1%"> Cart</h1>
+<div class="table-responsive">
+<table class="table cart-table" style="align:center;width:50%;margin-left:25%;margin-top:20px">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody class="card-body">
+
+            {% for product in cart.product.all %}
+      <tr>
+        <th>{{ forloop.counter }}</th>
+          <td><a href="{{ product.get_absolute_url }}" >{{ product.title }}</a></td>
+        <td>{{ product.price }}</td>
+          <td>  <form method="POST"  action="{% url "cart:update" %}" class="form" > {% csrf_token %}
+                <strong> <input type="hidden" name="product_id" value="{{ product.id }}" /></strong>
+                {% if object in cart.product.all %}
+                <button type="submit" style="color: black>Add to cart</button>
+
+                {% else %}
+                <button type="submit" class="btn btn-link">Remove</button>
+
+                {% endif %}
+          </form>
+</td>
+      </tr>
+            {% endfor %}
+
+      <tr>
+          <td colspan="2"></td>
+        <td><b>SubTotal  </b>{{ cart.subtotal }}</td>
+      </tr>
+        <tr>
+        <td colspan="2"></td>
+        <td><b>Total </b>{{ cart.total }}</td>
+      </tr>
+         <tr>
+        <td colspan="2"></td>
+             <td><b><a class='btn btn-lg btn-success' href='{% url "cart:checkout" %}'>CheckOut</a></b></td>
+      </tr>
+
+    {% else %}
+        <h1 style="text-align:center;margin-top:1%">Cart is empty</h1>
+    {% endif %}
+        </table>
+</div>
+{% endblock %}

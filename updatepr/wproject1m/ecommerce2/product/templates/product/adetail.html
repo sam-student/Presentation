@@ -1,0 +1,329 @@
+<head>
+
+
+    <style>
+.rate-area {
+	  float: left;
+	  border-style: none;
+
+	}
+      .rate-area:not(:checked) > input {
+
+	  position: absolute;
+
+	  top: -9999px;
+
+	  clip: rect(0,0,0,0);
+	}
+
+	.rate-area:not(:checked) > label {
+	  float: right;
+	  width: 1em;
+	  padding: 0.1em;
+	  overflow: hidden;
+
+	  white-space: nowrap;
+
+	  cursor: pointer;
+
+	  font-size: 250%;
+
+	  line-height: 1;
+
+	  color: lightgrey;
+
+	  text-shadow: 1px 1px #bbb;
+
+	}
+
+	.rate-area:not(:checked) > label:before { content: '★ '; }
+
+	.rate-area > input:checked ~ label {
+
+	  color: gold;
+
+	  text-shadow: 1px 1px #c60;
+
+	  font-size: 250% !important;
+
+	}
+
+	.rate-area:not(:checked) > label:hover, .rate-area:not(:checked) > label:hover ~ label { color: gold; }
+	.rate-area > input:checked + label:hover, .rate-area > input:checked + label:hover ~ label, .rate-area > input:checked ~           label:hover, .rate-area > input:checked ~ label:hover ~ label, .rate-area > label:hover ~ input:checked ~ label {
+	  color: gold;
+
+	  text-shadow: 1px 1px goldenrod;
+
+	}
+
+	.rate-area > label:active {
+
+	  position: relative;
+
+	  top: 2px;
+
+	  left: 2px;
+}
+
+    </style>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+     <div class="container">
+    <div class="row">
+        <div class="col-md-6 border-0">
+            <h1 style="font-size:4rem">{{ object.title }}</h1><hr><br/>
+    {% if object.image %}
+    <img class="img-responsive img-fluid" style="height: 68%" src="{{ object.image.url }}">
+    </div>
+        <div class="col-md-6">
+            <div class="card border-0" style="float:right;margin-top:70px;width:80%;height:85%">
+              <div class="card-body">
+                  <br/><br/><br/>
+                  <h3 style="text-align:center">Brand: {{object.brand}}</h3><hr>
+                 <h3 style="text-align:center">Price: Rs. {{object.price}}</h3><hr>
+                 <h3 style="text-align:center">Color: {{object.Color}}</h3><hr>
+                  <h3 style="text-align:center">Model: {{object.model}}</h3><hr>
+ <ul class="rate-area" style="display:inline;position:absolute">
+<input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Amazing">5 stars</label>
+<input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="Good">4 stars</label>
+<input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="Average">3 stars</label>
+<input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not Good">2 stars</label>
+<input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Bad">1 star</label>
+</ul>
+<br/><br/><br/><hr>
+   <form  class="form-inline justify-content-center" method="POST" action="{% url 'cart:update' %}" style="font-size:15">
+   {%csrf_token%}
+       <input type="number" name="qty" min="1" max="500" placeholder="0"><br>
+   </form>
+
+
+
+                  <div class="container-fluid" style=" margin-top: 30px">
+                {% include 'product/snippets/update-cart.html' with product=object cart=cart %}
+                </div>
+</div>
+
+</div>
+
+        </div>
+    </div>
+
+        </div>
+  <br/><br/><br/>
+       <hr>
+        <h1 style="text-align:center">Specifications</h1>
+        <hr>
+        <div class="table-responsive">
+        <table style="width:90%;margin-left: 30px;text-align: center">
+            <tr>
+        <th style="background-color: #daad86;color: white;text-align: center;border: 1px solid white " rowspan="5">Build</th>
+                <th>OS</th>
+                <td><p style="padding-left: 50px">{{ object.OperatingSystem|linebreaks }}</p></td>
+            </tr>
+             <tr>
+                <th>Dimensions</th>
+                 <td><p style="padding-left: 50px">{{ object.Dimension|linebreaks }}</p></td>
+                </tr>
+                <tr>
+                <th>Weight</th>
+                    <td><p style="padding-left:50px">{{ object.Weight|linebreaks }}</p></td>
+                </tr>
+                <tr>
+                <th>SIM</th>
+                    <td><p style="padding-left: 50px">{{ object.SIM|linebreaks }}</p></td>
+                </tr>
+                <tr>
+                <th>Colors</th>
+                    <td><p style="padding-left: 50px">{{ object.Color|linebreaks }}</p></td>
+                </tr>
+              </tr>
+            <tr>
+        <th style="background-color:#daad86;color: white;text-align: center;border: 1px solid white " rowspan="3">Frequency</th>
+                <th>2G Band</th>
+                          <td><p style="padding-left: 50px">{{ object.TwoGBand|linebreaks }}</td></p>
+            </tr>
+            <tr>
+                <th>3G Band</th>
+                          <td><p style="padding-left: 50px">{{ object.ThreeGBand|linebreaks }}</td></p>
+            </tr>
+            <tr>
+                <th>4G Band</th>
+                          <td><p style="padding-left: 50px">{{ object.FourGBand|linebreaks }}</td></p>
+
+            </tr>
+
+            <tr>
+
+        <th style="background-color: #daad86;color: white;text-align: center"; rowspan="2">Processor</th>
+                <th>CPU</th>
+                          <td><p style="padding-left: 50px">{{ object.CPU|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Chipset</th>
+                          <td><p style="padding-left: 50px">{{ object.Chipset|linebreaks }}</td></p>
+            </tr>
+
+
+            <tr>
+            <th style="background-color:#daad86;color: white;text-align: center;border: 1px solid white " rowspan="5"> Display</th>
+                  <th>Technology</th>
+                            <td><p style="padding-left: 50px">{{ object.Technology|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Size</th>
+                            <td><p style="padding-left: 50px">{{ object.Size|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Resolution</th>
+                            <td><p style="padding-left: 50px">{{ object.Resolution|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Protection</th>
+                            <td><p style="padding-left: 50px">{{ object.Protection|linebreaks }}</td></p>
+            </tr>
+        <tr/>
+                 <tr>
+        <th style="background-color: #daad86;color: white;text-align: center;border: 1px solid white " rowspan="3">Memory</th>
+                <th>Built-in</th>
+                          <td><p style="padding-left: 50px">{{ object.BuiltIn|linebreaks }}</td></p>
+            </tr>
+            <tr>
+                <th>SD card</th>
+                          <td><p style="padding-left: 50px">{{ object.card|linebreaks }}</td></p>
+            </tr>
+           <tr>
+               <tr/>
+        <th style="background-color: #daad86;color: white;text-align: center;border: 1px solid white " rowspan="3">Camera</th>
+                <th>Back Camera</th>
+                          <td><p style="padding-left: 50px">{{ object.Main|linebreaks }}</td></p>
+            </tr>
+            <tr>
+                <th>Front Camera</th>
+                          <td><p style="padding-left: 50px">{{ object.Front|linebreaks }}</td></p>
+            </tr>
+               <tr>
+                <th>Features</th>
+                          <td><p style="padding-left: 50px">{{ object.Features|linebreaks }}</td></p>
+            </tr>
+            <tr/>
+                <tr>
+                    <tr>
+        <th style="background-color: #daad86;color: white;text-align: center;border: 1px solid white "rowspan="7">Connectivity</th>
+                <th>WLAN</th>
+                      <td><p style="padding-left: 50px">{{ object.WLAN|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Bluetooth</th>
+                      <td><p style="padding-left: 50px">{{ object.Bluetooth|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>GPS</th>
+                      <td><p style="padding-left: 50px">{{ object.GPS|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Radio</th>
+                      <td><p style="padding-left: 50px">{{ object.Radio|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>USB</th>
+                      <td><p style="padding-left: 50px">{{ object.USB|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>NFC</th>
+                      <td><p style="padding-left: 50px">{{ object.NFC|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Data</th>
+                      <td><p style="padding-left: 50px">{{ object.Data|linebreaks }}</td></p>
+
+          </tr>
+          <tr>
+        <th style="background-color: #daad86;color: white;text-align: center;border: 1px solid white "rowspan="7">Features</th>
+                <th>Sensors</th>
+                        <td><p style="padding-left: 50px">{{ object.Sensors|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Audio</th>
+                        <td><p style="padding-left: 50px">{{ object.Audio|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Browser</th>
+                        <td><p style="padding-left: 50px">{{ object.Browser|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Messaging</th>
+                        <td><p style="padding-left: 50px">{{ object.Messaging|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Games</th>
+                        <td><p style="padding-left: 50px">{{ object.Games|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Torch</th>
+                        <td><p style="padding-left: 50px">{{ object.Torch|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>Extra</th>
+                        <td><p style="padding-left: 50px">{{ object.Extra|linebreaks }}</td></p>
+
+
+          </tr>
+            <tr>
+        <th style="background-color: #daad86;color: white;text-align: center"; rowspan="2">Battery</th>
+                <th>Capacity</th>
+                          <td><p style="padding-left: 50px">{{ object.Charging|linebreaks }}</td></p>
+            </tr>
+                <tr>
+                <th>StandBy</th>
+                          <td><p style="padding-left: 50px">{{ object.Charging|linebreaks }}</td></p>
+        </table>
+        <p style="margin-left: 0px"></p><br/>
+    {% endif %}
+
+        </div>
+
+
+<script>
+    $(document).ready(function(){
+
+    var quantitiy=0;
+    $('.quantity-right-plus').click(function(e){
+
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+
+        // If is not undefined
+
+        $('#quantity').val(quantity + 1);
+
+
+        // Increment
+
+    });
+
+    $('.quantity-left-minus').click(function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+
+        // If is not undefined
+
+        // Increment
+        if(quantity>0){
+            $('#quantity').val(quantity - 1);
+        }
+    });
+
+});
+
+</script>
+{% endblock %}
+</body>
+
+

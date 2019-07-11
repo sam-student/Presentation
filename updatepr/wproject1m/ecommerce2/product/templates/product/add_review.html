@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 style="margin-left: 350px">Add your review</h3>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+
+            <form action="{% url 'product:add_review' product.id %}" method="post" style="margin-left: 300px">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Add" />
+            </form>
+
+
+{% endblock %}

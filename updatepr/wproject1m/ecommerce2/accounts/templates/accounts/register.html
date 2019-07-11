@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="login" style="float:left; margin-left: 35%;margin-top:35px;border: 1px solid lightsteelblue; width: 25%">
+<h1 style="padding-left: 125px;padding-top: 5px">Register</h1>
+    <div class="container">
+        <div class="from-group">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+
+            <div class="alert alert-success">{{message}}</div>
+
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+<form method="POST"> {% csrf_token %}
+    <table style="height: 250px; margin-left: 25px">
+        {{ form.as_table }}
+    </table>
+    </br>
+    <button style="margin-left: 35%;width: 90px;height: 40px" type="submit" class="btn btn-default">Submit</button>
+    <br>
+    <a style="margin-top: 20px;height: 40px;margin-left:27%" class="btn btn-default" href="/login">Login to MOGAD</a>
+</form>
+</div>
+
+{% endblock %}

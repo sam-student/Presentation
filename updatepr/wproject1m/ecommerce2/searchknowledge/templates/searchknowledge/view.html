@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row mb-3">
+        {% include "searchknowledge/snippets/search_form.html" %}
+    {% if query %}
+        <div class="col-12">
+            <h6><b>{{ query }} & {{ query1 }} & {{ query2 }} $ {{ query3}}</b></h6>
+             <h1 style="text-align: center">Advanced Search</h1>
+            <div class="container-fluid" style="margin-top: 15px">
+    <div class="row">
+        {% for obj in object_list %}
+            <div class="col-4">
+            {% include "product/snippets/kcard.html" with instance=obj %}
+             </div>
+    {% endfor %}
+    </div>
+    </div>
+            <hr/>
+        </div>
+    {% else %}
+
+    <div class="col-12 col-md-6 mx-auto py-5">
+
+    </div>
+    <div class="col-12">
+        <hr>
+    </div>
+    {% endif %}
+
+    </div>
+
+
+{% endblock %}

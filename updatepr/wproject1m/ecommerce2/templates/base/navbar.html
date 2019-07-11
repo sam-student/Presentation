@@ -1,0 +1,116 @@
+{% load static %}
+<head>
+
+<style>
+
+
+ .nav-item:hover{
+    background-color: #45A29E ;
+
+
+}
+
+    .nav-item{
+        height: 70px;
+        padding-top: 15px;
+        text-align: center;
+
+    }
+    .nav-link:active{
+
+        color: red;
+    }
+
+
+</style>
+</head>
+<body>
+{#<h1>{{ brand_name }}</h1>#}
+{% url "home" as home_url %}
+{% url "contact" as contact_url %}
+{% url "product:list" as product_list_url %}
+{% url "product:alist" as product_alist_url %}
+{% url "product:plist" as product_plist_url %}
+{% url "product:pplist" as product_pplist_url %}
+{% url "product:ppplist" as product_ppplist_url %}
+
+{% url "searchknowledge:query" as search_list_url %}
+
+
+{% url "accessories:list" as accessories_list_url %}
+
+{% url "pproducts:list" as pproduct_list_url %}
+{% url "login" as login_url %}
+{% url "logout" as logout_url %}
+{% url "register" as register_url %}
+{% url "cart:home" as cart_url %}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#C5C6C7">
+  <a class="navbar-brand">
+          <img style="margin-left:30px;margin-top:2px" src="{%static 'img/logo.png'%}"alt="Mogads">
+        </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-left: 9%">
+      <li class="nav-item active">
+        <a class="nav-link" style="color: black ; font-weight: bold; font-size:20px " href="{{ home_url }}"><strong>Home</strong><span class="sr-only">(current)</span></a>
+      </li>
+     <li class="nav-item {% if request.path == pproduct_list_url %}{% endif %}">
+         <a class="nav-link" style="color: black ; font-weight: bold;font-size:20px" href="{{ product_pplist_url }}"><strong>Top Products</strong></a>
+      </li>
+      <li class="nav-item {% if request.path == product_list_url %}{% endif %}">
+        <a class="nav-link" style="color: black ;font-size:20px ;font-weight: bold" href="{{ product_plist_url }}"><strong>Cell Phones</strong></a>
+      </li>
+
+     <li class="nav-item {% if request.path == contact_url %}{% endif %}">
+        <a class="nav-link" style="color: black ;font-size:20px; font-weight: bold" href="{{ product_alist_url }}"><strong>Accessories</strong></a>
+      </li>
+         <li class="nav-item {% if request.path == contact_url %}{% endif %}">
+        <a class="nav-link" style="color: black ;font-size:20px; font-weight: bold" href="{{ contact_url }}"><strong>Help</strong></a>
+      </li>
+
+      {% if request.user.is_authenticated %}
+        <li class="nav-item {% if request.path == logout_url %}{% endif %}">
+        <a class="nav-link" style="color: black ;font-size:20px; font-weight: bold" href='{% url "product:history" %}'><strong>History</strong></a>
+      </li>
+         <li class="nav-item {% if request.path == logout_url %}{% endif %}">
+        <a class="nav-link" style="color: black ;font-size:20px; font-weight: bold" href='{% url "product:recommendations" %}'><strong>Recommendations</strong></a>
+      </li>
+      <li class="nav-item {% if request.path == logout_url %}{% endif %}">
+        <a class="nav-link" style="color: black ;font-size:20px; font-weight: bold" href="{{ logout_url }}"><strong>Logout</strong></a>
+      </li>
+      {% else %}
+
+      <li class="nav-item {% if request.path == login_url %}{% endif %}">
+        <a class="nav-link" style="color: black ;font-size:20px; font-weight: bold" href="{{ login_url }}"><strong>Register/Login</strong></a>
+      </li>
+
+      {% endif %}
+      <li class="nav-item {% if request.path == cart_url %}{% endif %}" >
+
+         <a class="nav-link" style="color: black;margin-top:-8px ;font-size:20px; font-weight: bold" href="{{ cart_url }}"><span class="navbar-cart-count"><img src="{% static "img/cart.png" %}"><strong>Cart</strong> {{ request.session.cart_items }}</span></a>
+      </li>
+
+
+         {% if request.user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" style="color: black ;font-size:20px; font-weight: bold" href="{% url 'wine_list' %}"><strong>Reviews</strong></a>
+      </li>
+     {% endif %}
+         <li class="nav-item {% if request.path == login_url %}{% endif %}">
+        <a class="nav-link" style="margin-left:10px;color: black ;font-size:20px; font-weight: bold" href="{{ search_list_url }}"><strong>Advanced Searches</strong></a>
+      </li>
+
+
+    </ul>
+  </div>
+</nav>
+<div style="background-color:#C5C6C7;margin-bottom:25px">
+ {% include "search/snippets/search_form.html" %}
+</div>
+
+
+</body>

@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% url "aproducts:list" as aproduct_list_url %}
+
+{% url "samsungproducts:list" as samsungproduct_list_url %}
+{% url "huaweiproducts:list" as aproduct_list_url %}
+{% url "One_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "Two_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "Three_GB_Mobiles:list" as One_GB_Mobiles_list_url %}
+{% url "FivektoTenk:list" as FivektoTenk_list_url %}
+{% url "TenktoTwentyk:list" as TenktoTwentyk_list_url %}
+{% url "TwentyktoThirtyk:list" as TwentyktoThirtyk_list_url %}
+
+{% url "FiveMPMobile:list" as FiveMPMobiles_list_url %}
+{% url "EightMPMobile:list" as EightMPMobiles_list_url %}
+{% url "TwelveMPMobile:list" as TwelveMPMobiles_list_url %}
+{% url "searchknowledge:query" as search_list_url %}
+
+
+{% url "product:applelist" as appleproduct_list_url %}
+
+{% block content %}
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidepanel  {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 250px;
+  top: 0;
+  left: 0;
+  background-color: #daad86;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #daad86;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: grey;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color:#444;
+}
+</style>
+<div id="mySidepanel" class="sidepanel">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+ <button class="btn btn-block btn-responsive" style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+                <a style="color: black;" href="{% url 'aproducts:list' %}">Search by Brand</a>
+        </button>
+    <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="color: white;"  href="{% url 'product:applelist' %}">Apple</a>
+            </button>
+        <button class="btn btn-block btn-responsive" style="background-color:#daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="color: white " href="{% url 'product:samsunglist' %}">Samsung</a>
+        </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="color: white" href="{% url 'product:huaweilist' %}">Huawei</a>
+    </button>
+        <button class="btn btn-block btn-responsive" style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+            Search by Ram
+        </button>
+
+        {% include "searchram/snippets/search_form.html" with instance=obj %}
+
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:1GBlist' %}">1GB</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:2GBlist' %}">2GB</a>
+        </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:3GBlist' %}">3GB</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:4GBlist' %}">4GB or above</a>
+    </button>
+        <button class="btn btn-block btn-responsive" style="background-color: white;color: black;width: 250px;height:50px;padding-left: 0px;margin-top: 10px">Search By Price</button>
+            {% include "searchprice/snippets/search_form.html" with instance=obj %}
+        <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:10klist' %}"> > 10000</a>
+        </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:10to20klist' %}">10000 -- 20000</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:20to30klist' %}">20000 -- 30000</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:30klist' %}">< 30000 </a>
+    </button>
+    <button class="btn btn-block btn-responsive"   style="background-color: white;color: black;margin-top: 10px">
+        <a style="color:black;width: 250px;height:50px " href="{% url 'aproducts:list' %}">Search by Camera</a>
+        </button>
+                                 {% include "searchprice/snippets/search_form.html" with instance=obj %}
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px ;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:5MPlist' %}"> 5MP </a>
+        </button>
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px; margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:8MPlist' %}"> 8MP </a>
+        </button>
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px;;margin-top: 10px">
+            <a style="background-color: #daad86;color: white;" href="{% url 'product:12MPlist' %}"> 12MP </a>
+        </button>
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:12MP+list' %}"> 12MP or above </a>
+        </button>
+    <button class="btn btn-block btn-responsive"  style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+        <a style="color:black" href="{% url 'searchknowledge:query' %}">Advanced Search</a>
+        </button>
+        {% include "searchknowledge/snippets/search_form.html" with instance=obj %}
+
+</div>
+
+<button class="openbtn  d-block d-xl-none" onclick="openNav()">☰ Search from side panel</button>
+
+<script>
+function openNav() {
+  document.getElementById("mySidepanel").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidepanel").style.width = "0";
+}
+</script>
+
+    <h1 style="text-align: center">Products</h1>
+<div class="container-fluid d-none d-xl-block" style="width: 17%;height: 1400px;float: left;background-color: lavender">
+     <button class="btn btn-block btn-responsive" style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+                <a style="color: black;" href="{% url 'aproducts:list' %}"><b>Search by Brand</b></a>
+        </button>
+    <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px">
+            <a style="color: white;"  href="{% url 'product:applelist' %}">Apple</a>
+            </button>
+        <button class="btn btn-block btn-responsive" style="background-color:#daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="color: white " href="{% url 'product:samsunglist' %}">Samsung</a>
+        </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="color: white" href="{% url 'product:huaweilist' %}">Huawei</a>
+    </button>
+        <button class="btn btn-block btn-responsive" style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+            <b>Search by Ram</b>
+        </button>
+
+        {% include "searchram/snippets/search_form.html" with instance=obj %}
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:1GBlist' %}">1GB</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:2GBlist' %}">2GB</a>
+        </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:3GBlist' %}">3GB</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:4GBlist' %}">4GB or above</a>
+    </button>
+        <button class="btn btn-block btn-responsive" style="background-color: white;color: black;width: 250px;height:50px;padding-left: 0px;margin-top: 10px"><b>Search By Price</b></button>
+            {% include "searchprice/snippets/search_form.html" with instance=obj %}
+        <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:10klist' %}"> > 10000</a>
+        </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:10to20klist' %}">10000 -- 20000</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:20to30klist' %}">20000 -- 30000</a>
+    </button>
+    <button class="btn btn-block btn-responsive" style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:30klist' %}">< 30000 </a>
+    </button>
+    <button class="btn btn-block btn-responsive"   style="background-color: white;color: black;margin-top: 10px">
+        <a style="color:black;width: 250px;height:50px " href="{% url 'aproducts:list' %}"><b>Search by Camera</b></a>
+        </button>
+                                 {% include "searchprice/snippets/search_form.html" with instance=obj %}
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px ;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:5MPlist' %}"> 5MP </a>
+        </button>
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px; margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:8MPlist' %}"> 8MP </a>
+        </button>
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px;;margin-top: 5px">
+            <a style="background-color: #daad86;color: white;" href="{% url 'product:12MPlist' %}"> 12MP </a>
+        </button>
+        <button class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 5px">
+            <a style="background-color: #daad86;color: white" href="{% url 'product:12MP+list' %}"> 12MP or above </a>
+        </button>
+    <button class="btn btn-block btn-responsive"  style="background-color: white;color: black;width: 250px;height:50px;margin-top: 10px">
+        <a style="color:black" href="{% url 'searchknowledge:query' %}"><b>Advanced Search</b></a>
+        </button>
+        {% include "searchknowledge/snippets/search_form.html" with instance=obj %}
+
+</div>
+</div>
+
+<div class="container-fluid" style="margin-top: 15px;padding-left: 90px">
+        <div class="row">
+
+                {% for obj in object_list %}
+                    <div class="col">
+
+
+
+                            {% include "product/snippets/card.html" with instance=obj %}
+                    </div>
+<!--{##}-->
+<!--{#                    {% endif %}#}-->
+<!--{##}-->
+                {% endfor %}
+<!--{#                                     </div>#}-->
+
+            </div>
+
+        </div>
+
+
+
+{% endblock %}
